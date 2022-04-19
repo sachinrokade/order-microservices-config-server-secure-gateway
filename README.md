@@ -17,7 +17,8 @@
 | GATEWAY-Secure SERVICE	           | http://localhost:9191/8771       |
 | Auth Service	                     | http://localhost:6000/auth/login    |
 
-
+			
+**Non Secure Gateway**
 -----------------------------------------------------
 
 Request Body <br>
@@ -46,7 +47,9 @@ URL : http://localhost:8989/payment/12345
     }
 }
 
-**----------------------------------Secure Gateway -------------------**
+**Secure Gateway**
+-----------------------------------------------------
+
 
 1. generate access token <br>
    1.Request Body <br>
@@ -102,3 +105,25 @@ Note :
 |-------------------|-----------------------------------------|
 | 401 Unauthorized	 | accessing url without Token             |
 | 400 Bad Request   | Token is expire [token valid for 3 min] |
+
+
+
+
+Eureka Server
+
+![ ](img/eureka.PNG)
+
+
+Hystrix Dashboard
+
+![ ](img/hystrix.PNG)
+
+
+Access Token
+
+![ ](img/access token.PNG)
+
+
+Zipkin Server
+
+![ ](img/zipkin.PNG)

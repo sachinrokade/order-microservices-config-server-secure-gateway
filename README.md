@@ -120,8 +120,7 @@ Hystrix Dashboard
 
 
 Access Token
-
-![ ](img/access token.PNG)
+![ ](img/access%20token.PNG)
 
 
 Zipkin Server

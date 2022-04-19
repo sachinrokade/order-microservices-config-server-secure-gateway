@@ -1,0 +1,10 @@
+server:
+  port: 9191
+spring:
+  application:
+    name: payment-service
+  active:
+    profile: dev
+  h2:
+      console:
+        enabled: true

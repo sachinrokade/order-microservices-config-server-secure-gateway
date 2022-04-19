@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+		 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		
+
+		<modelVersion>4.0.0</modelVersion>
+		<groupId>com.micro</groupId>
+	    <artifactId>build-all</artifactId>
+	    <version>0.0.1-SNAPSHOT</version>
+	    <name>order-micro</name>
+	    <packaging>pom</packaging>
+		
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.1.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+	<java.version>1.8</java.version>
+	</properties>
+
+		<!-- sub modules -->
+	<modules>
+		<module>/cloud-config-server</module>
+		<module>/cloud-secure-gateway</module>
+		<module>/auth</module>
+		<module>/cloud-gateway</module>
+		<module>/service-registry</module>
+		<module>/hystrix-dashboard</module>
+		<module>/order-service</module>
+		<module>/payment-service</module>
+    </modules>
+	
+<build>
+		</build>
+</project>

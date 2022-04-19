@@ -13,7 +13,6 @@
 | Swagger URl [Order Service]       | http://localhost:9192/swagger-ui.html   |
 | Order H2                          | http://localhost:9191/h2-console  |
 | PAYMENT-H2	                       | http://localhost:9192/h2-console  |
-| PAYMENT-SERVICE	                  | http://localhost:9191             |
 | GATEWAY-Secure SERVICE	           | http://localhost:9191/8771       |
 | Auth Service	                     | http://localhost:6000/auth/login    |
 
@@ -109,20 +108,21 @@ Note :
 
 
 
-Eureka Server
-
+**Eureka Server**
+-----------------------------------------------------
 ![ ](img/eureka.PNG)
 
 
-Hystrix Dashboard
-
+**Hystrix Dashboard**
+-----------------------------------------------------
 ![ ](img/hystrix.PNG)
 
 
-Access Token
+**Access Token**
+-----------------------------------------------------
 ![ ](img/access%20token.PNG)
 
 
-Zipkin Server
-
+**Zipkin Server**
+-----------------------------------------------------
 ![ ](img/zipkin.PNG)

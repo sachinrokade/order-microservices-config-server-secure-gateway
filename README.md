@@ -2,7 +2,8 @@
 
 | Methods                           | 	uri                              |
 |-----------------------------------|-----------------------------------|
-| CONFIG-SERVER	                    | http://localhost:9196	            || CONFIG-SERVER	          | http://localhost:9196	              |
+| EurekaRegistry	                   | http://localhost:8761	              |
+| CONFIG-SERVER	                    | http://localhost:9196	            |
 | GATEWAY-SERVICE	                  | http://localhost:8989             |
 | GATEWAY-SERVICE	[Test Env]        | http://localhost:9196/order-service/dev          |
 | ORDER-SERVICE	                    | http://localhost:9192             |

@@ -1,6 +1,6 @@
 #  Important Url 
 
-| Methods                           | 	URL's                                        |
+| SERVICE                           | 	URL's                                        |
 |-----------------------------------|-----------------------------------------------|
 | EurekaRegistry	                   | http://localhost:8761	                        |
 | CONFIG-SERVER	                    | http://localhost:9196	                        |

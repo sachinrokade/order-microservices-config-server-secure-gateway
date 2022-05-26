@@ -1,21 +1,21 @@
 #  Important Url 
 
-| Methods                           | 	uri                              |
-|-----------------------------------|-----------------------------------|
-| EurekaRegistry	                   | http://localhost:8761	              |
-| CONFIG-SERVER	                    | http://localhost:9196	            |
-| GATEWAY-SERVICE	                  | http://localhost:8989             |
-| GATEWAY-SERVICE	[Test Env]        | http://localhost:9196/order-service/dev          |
-| ORDER-SERVICE	                    | http://localhost:9192             |
-| PAYMENT-SERVICE	                  | http://localhost:9191             |
-| Hystrix-DashBoard	                | http://localhost:9195/hystrix     |
+| Methods                           | 	URL's                                        |
+|-----------------------------------|-----------------------------------------------|
+| EurekaRegistry	                   | http://localhost:8761	                        |
+| CONFIG-SERVER	                    | http://localhost:9196	                        |
+| GATEWAY-SERVICE	                  | http://localhost:8989                         |
+| GATEWAY-SERVICE	[Test Env]        | http://localhost:9196/order-service/dev       |
+| ORDER-SERVICE	                    | http://localhost:9192                         |
+| PAYMENT-SERVICE	                  | http://localhost:9191                         |
+| Hystrix-DashBoard	                | http://localhost:9195/hystrix                 |
 | Stream-URL	                       | http://localhost:8989/actuator/hystrix.stream |
- | Zipkin URL [run zipkin jar first] | http://localhost:9411/zipkin  |
-| Swagger URl [Order Service]       | http://localhost:9192/swagger-ui.html   |
-| Order H2                          | http://localhost:9191/h2-console  |
-| PAYMENT-H2	                       | http://localhost:9192/h2-console  |
-| GATEWAY-Secure SERVICE	           | http://localhost:9191/8771       |
-| Auth Service	                     | http://localhost:6000/auth/login    |
+ | Zipkin URL [run zipkin jar first] | http://localhost:9411/zipkin                  |
+| Swagger URl [Order Service]       | http://localhost:9192/swagger-ui.html         |
+| Order H2                          | http://localhost:9191/h2-console              |
+| PAYMENT-H2	                       | http://localhost:9192/h2-console              |
+| GATEWAY-Secure SERVICE	           | http://localhost:9191/8771                    |
+| Auth Service	                     | http://localhost:6000/auth/login              |
 
 			
 **Non Secure Gateway**

@@ -25,14 +25,16 @@ Request Body <br>
     Method : Post <br>
     URL : http://localhost:8989/order/bookOrder 
 
-	"order":{
-		"id":12345,
-		"name":"Mobile",
-		"qty":1,
-		"price":8000
-		
-	},
-	"payment":{}
+	{
+		"order":{
+			"id":103000,
+			"name":"Mobile",
+			"qty":1,
+			"price":8000
+
+		},
+		"payment":{}
+	}
 
 Response <br>
 Method :GET<br>

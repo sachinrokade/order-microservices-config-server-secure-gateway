@@ -15,7 +15,7 @@
 | Order H2                          | http://localhost:9191/h2-console              |
 | PAYMENT-H2	                       | http://localhost:9192/h2-console              |
 | GATEWAY-Secure SERVICE	           | http://localhost:9191/8771                    |
-| Auth Service	                     | http://localhost:6000/auth/login              |
+| Auth Service	                     | http://localhost:6000/auth/log              |
 
 			
 **Non Secure Gateway**

@@ -1,0 +1,12 @@
+{
+  "/order": {
+    "target": "http://localhost:9192",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/payment": {
+    "target": "http://localhost:9191",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

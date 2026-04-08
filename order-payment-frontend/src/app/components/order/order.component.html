@@ -1,0 +1,97 @@
+<div class="order-container">
+  <mat-card class="order-card">
+    <mat-card-header>
+      <mat-card-title>Book Order</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="orderForm">
+        <mat-form-field class="full-width">
+          <mat-label>User ID</mat-label>
+          <input matInput formControlName="userId" type="number" placeholder="Enter user ID">
+          <mat-error *ngIf="orderForm.get('userId')?.hasError('required')">User ID is required</mat-error>
+          <mat-error *ngIf="orderForm.get('userId')?.hasError('pattern')">User ID must be numeric</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Amount</mat-label>
+          <input matInput formControlName="amount" type="number" placeholder="Enter amount" step="0.01">
+          <mat-error *ngIf="orderForm.get('amount')?.hasError('required')">Amount is required</mat-error>
+          <mat-error *ngIf="orderForm.get('amount')?.hasError('pattern')">Amount must be numeric</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Product Details</mat-label>
+          <input matInput formControlName="productDetails" placeholder="Enter product details">
+          <mat-error *ngIf="orderForm.get('productDetails')?.hasError('required')">Product details are required</mat-error>
+          <mat-error *ngIf="orderForm.get('productDetails')?.hasError('minlength')">Minimum 3 characters required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Account Number</mat-label>
+          <input matInput formControlName="accountNumber" placeholder="Enter account number">
+          <mat-error *ngIf="orderForm.get('accountNumber')?.hasError('required')">Account number is required</mat-error>
+          <mat-error *ngIf="orderForm.get('accountNumber')?.hasError('pattern')">Account number must be 10-20 digits</mat-error>
+        </mat-form-field>
+
+        <div class="button-group">
+          <button mat-raised-button color="primary" (click)="bookOrder()" [disabled]="isLoading">
+            <mat-icon *ngIf="!isLoading">send</mat-icon>
+            <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+            {{ isLoading ? 'Processing...' : 'Book Order' }}
+          </button>
+          <button mat-stroked-button (click)="resetForm()" [disabled]="isLoading">Reset</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Response Display -->
+  <mat-card class="response-card" *ngIf="orderResponse">
+    <mat-card-header>
+      <mat-card-title>Order Response</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table mat-table [dataSource]="[orderResponse]" class="response-table">
+        <!-- Transaction ID Column -->
+        <ng-container matColumnDef="transactionId">
+          <th mat-header-cell *matHeaderCellDef>Transaction ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.transactionId }}</td>
+        </ng-container>
+
+        <!-- Order ID Column -->
+        <ng-container matColumnDef="orderId">
+          <th mat-header-cell *matHeaderCellDef>Order ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.orderId }}</td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            <span [ngClass]="{
+              'status-success': element.status === 'SUCCESS',
+              'status-pending': element.status === 'PENDING',
+              'status-failed': element.status === 'FAILED'
+            }">{{ element.status }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Amount Column -->
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>Amount</th>
+          <td mat-cell *matCellDef="let element">{{ element.amount | currency }}</td>
+        </ng-container>
+
+        <!-- Message Column -->
+        <ng-container matColumnDef="message">
+          <th mat-header-cell *matHeaderCellDef>Message</th>
+          <td mat-cell *matCellDef="let element">{{ element.message }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

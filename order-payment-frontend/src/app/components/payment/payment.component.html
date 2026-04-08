@@ -1,0 +1,179 @@
+<div class="payment-container">
+  <!-- Payment Form Card -->
+  <mat-card class="payment-card">
+    <mat-card-header>
+      <mat-card-title>Process Payment</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="paymentForm">
+        <div class="form-row">
+          <mat-form-field class="form-column">
+            <mat-label>Order ID</mat-label>
+            <input matInput formControlName="orderId" type="number" placeholder="Enter order ID">
+            <mat-error *ngIf="paymentForm.get('orderId')?.hasError('required')">Order ID is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="form-column">
+            <mat-label>Transaction ID</mat-label>
+            <input matInput formControlName="transactionId" type="number" placeholder="Enter transaction ID">
+            <mat-error *ngIf="paymentForm.get('transactionId')?.hasError('required')">Transaction ID is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field class="form-column">
+            <mat-label>Amount</mat-label>
+            <input matInput formControlName="amount" type="number" placeholder="Enter amount" step="0.01">
+            <mat-error *ngIf="paymentForm.get('amount')?.hasError('required')">Amount is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="form-column">
+            <mat-label>Payment Mode</mat-label>
+            <mat-select formControlName="paymentMode">
+              <mat-option value="CREDIT_CARD">Credit Card</mat-option>
+              <mat-option value="DEBIT_CARD">Debit Card</mat-option>
+              <mat-option value="NET_BANKING">Net Banking</mat-option>
+              <mat-option value="UPI">UPI</mat-option>
+              <mat-option value="WALLET">Wallet</mat-option>
+            </mat-select>
+            <mat-error *ngIf="paymentForm.get('paymentMode')?.hasError('required')">Payment mode is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field class="full-width">
+          <mat-label>Reference Number</mat-label>
+          <input matInput formControlName="referenceNumber" placeholder="Enter reference number">
+          <mat-error *ngIf="paymentForm.get('referenceNumber')?.hasError('required')">Reference number is required</mat-error>
+        </mat-form-field>
+
+        <div class="button-group">
+          <button mat-raised-button color="primary" (click)="doPayment()" [disabled]="isLoading">
+            <mat-icon *ngIf="!isLoading">payment</mat-icon>
+            <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+            {{ isLoading ? 'Processing...' : 'Process Payment' }}
+          </button>
+          <button mat-stroked-button (click)="resetPaymentForm()" [disabled]="isLoading">Reset</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Payment Response -->
+  <mat-card class="response-card" *ngIf="paymentResponse">
+    <mat-card-header>
+      <mat-card-title>Payment Response</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table mat-table [dataSource]="[paymentResponse]" class="response-table">
+        <ng-container matColumnDef="paymentId">
+          <th mat-header-cell *matHeaderCellDef>Payment ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.paymentId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="orderId">
+          <th mat-header-cell *matHeaderCellDef>Order ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.orderId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>Amount</th>
+          <td mat-cell *matCellDef="let element">{{ element.amount | currency }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="paymentMode">
+          <th mat-header-cell *matHeaderCellDef>Payment Mode</th>
+          <td mat-cell *matCellDef="let element">{{ element.paymentMode }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="paymentStatus">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            <span [ngClass]="{
+              'status-success': element.paymentStatus === 'SUCCESS',
+              'status-pending': element.paymentStatus === 'PENDING',
+              'status-failed': element.paymentStatus === 'FAILED'
+            }">{{ element.paymentStatus }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="referenceNumber">
+          <th mat-header-cell *matHeaderCellDef>Reference Number</th>
+          <td mat-cell *matCellDef="let element">{{ element.referenceNumber }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Payment History Card -->
+  <mat-card class="history-card">
+    <mat-card-header>
+      <mat-card-title>Payment History</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="historyForm">
+        <div class="history-form">
+          <mat-form-field>
+            <mat-label>Enter Order ID</mat-label>
+            <input matInput formControlName="orderId" type="number" placeholder="Enter order ID">
+            <mat-error *ngIf="historyForm.get('orderId')?.hasError('required')">Order ID is required</mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button color="accent" (click)="getPaymentHistory()" [disabled]="isLoading">
+            <mat-icon *ngIf="!isLoading">history</mat-icon>
+            <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+            {{ isLoading ? 'Fetching...' : 'Get History' }}
+          </button>
+          <button mat-stroked-button (click)="resetHistoryForm()" [disabled]="isLoading">Clear</button>
+        </div>
+      </form>
+
+      <div *ngIf="paymentHistory" class="history-result">
+        <table mat-table [dataSource]="[paymentHistory]" class="history-table">
+          <ng-container matColumnDef="paymentId">
+            <th mat-header-cell *matHeaderCellDef>Payment ID</th>
+            <td mat-cell *matCellDef="let element">{{ element.paymentId }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="orderId">
+            <th mat-header-cell *matHeaderCellDef>Order ID</th>
+            <td mat-cell *matCellDef="let element">{{ element.orderId }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef>Amount</th>
+            <td mat-cell *matCellDef="let element">{{ element.amount | currency }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="paymentMode">
+            <th mat-header-cell *matHeaderCellDef>Payment Mode</th>
+            <td mat-cell *matCellDef="let element">{{ element.paymentMode }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="paymentStatus">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let element">
+              <span [ngClass]="{
+                'status-success': element.paymentStatus === 'SUCCESS',
+                'status-pending': element.paymentStatus === 'PENDING',
+                'status-failed': element.paymentStatus === 'FAILED'
+              }">{{ element.paymentStatus }}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="referenceNumber">
+            <th mat-header-cell *matHeaderCellDef>Reference Number</th>
+            <td mat-cell *matCellDef="let element">{{ element.referenceNumber }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

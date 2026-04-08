@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" class="toolbar">
+  <span>{{ title }}</span>
+  <span class="spacer"></span>
+  <nav>
+    <a mat-button routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <a mat-button routerLink="/order" routerLinkActive="active">Order</a>
+    <a mat-button routerLink="/payment" routerLinkActive="active">Payment</a>
+  </nav>
+</mat-toolbar>
+
+<div class="container mt-20">
+  <router-outlet></router-outlet>
+</div>

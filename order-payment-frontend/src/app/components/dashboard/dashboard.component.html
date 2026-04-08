@@ -1,0 +1,47 @@
+<div class="dashboard-container">
+  <div class="welcome-section">
+    <h1>Welcome to Order Payment System</h1>
+    <p>Manage your orders and payments seamlessly</p>
+  </div>
+
+  <div class="features-grid">
+    <mat-card class="feature-card" *ngFor="let feature of features" [style.border-left]="'4px solid ' + feature.color">
+      <mat-card-content>
+        <div class="feature-icon">
+          <mat-icon>{{ feature.icon }}</mat-icon>
+        </div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+        <a mat-raised-button [href]="feature.link" color="primary">Open</a>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="info-section">
+    <mat-card class="info-card">
+      <mat-card-header>
+        <mat-card-title>System Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <strong>Order Service URL:</strong>
+            <p>http://localhost:9192/order</p>
+          </div>
+          <div class="info-item">
+            <strong>Payment Service URL:</strong>
+            <p>http://localhost:9191/payment</p>
+          </div>
+          <div class="info-item">
+            <strong>Available Endpoints:</strong>
+            <ul>
+              <li>POST /order/bookOrder</li>
+              <li>POST /payment/doPayment</li>
+              <li>GET /payment/{{ '{' }}orderId{{ '}' }}</li>
+            </ul>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
